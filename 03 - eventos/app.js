@@ -2,12 +2,14 @@
 
 // variables
 const formulario = document.querySelector('form');
-const nombre = document.querySelector('[name="nombre"]');
-const apellido = document.querySelector('[name="apellido"]');
-const telefono = document.querySelector('[name="telefono"]');
-const documento = document.querySelector('[name="documento"]');
-const usuario = document.querySelector('[name="usuario"]');
-const contrasena = document.querySelector('[name="contrasena"]');
+const nombre = document.querySelector('[name="Nombre"]');
+const apellido = document.querySelector('[name="Apellido"]');
+const telefono = document.querySelector('[name="Telefono"]');
+const documento = document.querySelector('[name="Documento"]');
+const usuario = document.querySelector('[name="Usuario"]');
+const contrasena = document.querySelector('[name="Contrasena"]');
+
+const campos = [nombre, apellido, telefono, documento, usuario, contrasena];
 
 const teclasEspeciales = ["Backspace", "Tab", "Enter", "ArrowLeft", "ArrowRight", "Delete"];
 
@@ -15,62 +17,52 @@ const teclasEspeciales = ["Backspace", "Tab", "Enter", "ArrowLeft", "ArrowRight"
 
 const validarTexto = (event) => {
   const key = event.key;
-  const regex = /^[a-z\s]*$/i;
-  const letra = key;
-  if (!regex.test(letra)) {
+  const regex = /^[\D]*$/i;  
+  if (!regex.test(key)) {
     event.preventDefault();
   }
 }
 
 const validarNumero = (event) => {
   const key = event.key;
-  const regex = /^[0-9]*$/;
-  const letra = key;
-  if (!regex.test(letra) && !teclasEspeciales.includes(letra)) {
+  const regex = /^[\d]*$/;  
+  if (!regex.test(key) && !teclasEspeciales.includes(key)) {
     event.preventDefault();
   }
 }
 
 const validarCampos = (event) => {
+
   event.preventDefault();
-  let errores = [];
-  let regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
-  if (nombre.value.trim() == "") {
-    errores.push("Nombre");
-    nombre.focus();
-  }
-  if (apellido.value.trim() == "") {
-    errores.push("Apellido");
-    apellido.focus();
-  }
-  if (telefono.value.trim() == "") {
-    errores.push("Telefono");
-    telefono.focus();
-  }
-  if (documento.value.trim() == "") {
-    errores.push("Documento");
-    documento.focus();
-  }
-  if (usuario.value.trim() == "") {
-    errores.push("Usuario");
-    usuario.focus();
-  }
-  if (contrasena.value.trim() == "") {
-    errores.push("Contraseña");
-    contrasena.focus();
-  }
-  
-  if (errores.length > 1) {
-    alert(`Los siguientes campos son obligatorios: \n⊗ ${errores.join('\n ⊗ ')}` );
+  let camposVacios = [];
+  let regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+
+
+  campos.forEach(campo => {
+    if (campo.value.trim() == "") {
+      camposVacios.push(campo.name);  
+    }
+  });
+
+  let mensaje = "";
+
+  if (camposVacios.length > 1) {
+    mensaje = `Los siguientes campos son obligatorios: \n⊗ ${camposVacios.join('\n ⊗ ')}\n`;    
   } 
-  else if (errores.length == 1) {
-    alert(`El siguiente campo es obligatorio: \n⊗ ${errores[0]}`);    
+  else if (camposVacios.length == 1) {
+    mensaje = `El siguiente campo es obligatorio: \n⊗ ${camposVacios[0]}\n`;    
+  }  
+
+  if (!regexContra.test(contrasena.value)) {
+    mensaje += "\nLa contraseña debe tener al menos 8 caracteres, una mayúscula y un número";    
   }
 
-  if (regexContra.test(contrasena.value) == false) {
-    alert("La contraseña debe tener al menos 8 caracteres, una mayúscula y un número");
-    contrasena.focus();
+  if (mensaje != "") {
+    alert(mensaje);    
+  } 
+  else {
+    alert("Formulario enviado correctamente");    
   }
 }
 
