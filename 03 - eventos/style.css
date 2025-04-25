@@ -170,3 +170,29 @@ button:hover {
   background: var(--heavyMetal);
   color: var(--starship);
 }
+
+.borde-rojo {
+  border: 2px solid darkred;
+  box-shadow: 0 0 8px darkred;
+}
+
+.texto-advertencia {
+  display: flex;
+  font-size: 12px;
+  color: #c50606;  
+  font-weight: bold;
+  justify-content: end;
+  margin: -5px 25px;
+}
+
+.politica {
+  display: flex;
+  align-items: center;
+  margin: 0 30px;
+}
+
+.politica__check {
+  display: inline;
+  width: auto;
+  margin: 0 10px 0 0;
+}

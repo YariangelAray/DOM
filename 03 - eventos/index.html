@@ -20,13 +20,34 @@
           <div class="card">
             <h2 class="center">Ingrese su datos de usuario</h2>
             <form action="#">
-              <input type="text" name= "Nombre" placeholder="Nombre">
-              <input type="text" name= "Apellido"  placeholder="Apellido">
-              <input type="tel" name= "Telefono" placeholder="Telefono">
-              <input type="number" name= "Documento" placeholder="Documento">
-              <input type="text" name= "Usuario" placeholder="Usuario">
-              <input type="password" name= "Contrasena"  placeholder="Contraseña">
+              <div class="form__control">
+                <input type="text" name= "Nombre" placeholder="Nombre">              
+              </div>
+              <div class="form__control">
+                <input type="text" name= "Apellido"  placeholder="Apellido">              
+              </div>
+              <div class="form__control">
+                <input type="tel" name= "Telefono" placeholder="Telefono">              
+              </div>
+              <div class="form__control">
+                <input type="number" name= "Documento" placeholder="Documento">              
+              </div>
+              <div class="form__control">
+                <input type="text" name= "Usuario" placeholder="Usuario">              
+              </div>
+              <div class="form__control">
+                <input type="password" name= "Contrasena"  placeholder="Contraseña">              
+              </div>
+
+              <div class="form__control">
+                <label for="politica" class="politica">
+                  <input type="checkbox" name="politica" id="politica" class="politica__check"> Acepto términos y condiciones
+                </label>
+                
+              </div>
+
               <button type="submit" id="btn_validar">Validar</button>
+
             </form>
           </div>
         </div>
