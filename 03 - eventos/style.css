@@ -119,7 +119,7 @@ form {
   padding: var(--padding);
 }
 
-input {
+input, select {
   display: block;
   width: 90%;
   padding: calc(var(--padding) + 4px);

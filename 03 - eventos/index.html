@@ -19,24 +19,32 @@
         <div class="container">
           <div class="card">
             <h2 class="center">Ingrese su datos de usuario</h2>
-            <form action="#">
+            <form action="#" novalidate>
               <div class="form__control">
-                <input type="text" name= "Nombre" placeholder="Nombre">              
+                <input type="text" name= "Nombre" placeholder="Nombre" required>              
               </div>
               <div class="form__control">
-                <input type="text" name= "Apellido"  placeholder="Apellido">              
+                <input type="text" name= "Apellido"  placeholder="Apellido" required>              
               </div>
               <div class="form__control">
-                <input type="tel" name= "Telefono" placeholder="Telefono">              
+                <input type="tel" name= "Telefono" placeholder="Telefono" required>              
               </div>
               <div class="form__control">
-                <input type="number" name= "Documento" placeholder="Documento">              
+                <select name="Ciudad" id="ciudad" required>
+                  <option value="1">Seleccione una ciudad</option>
+                  <option value="2">Bucaramanga</option>
+                  <option value="3">Girón</option>
+                  <option value="4">Floridablanca</option>
+                </select>            
               </div>
               <div class="form__control">
-                <input type="text" name= "Usuario" placeholder="Usuario">              
+                <input type="number" name= "Documento" placeholder="Documento" >              
               </div>
               <div class="form__control">
-                <input type="password" name= "Contrasena"  placeholder="Contraseña">              
+                <input type="text" name= "Usuario" placeholder="Usuario" >              
+              </div>
+              <div class="form__control">
+                <input type="password" name= "Contrasena"  placeholder="Contraseña" required>              
               </div>
 
               <div class="form__control">
@@ -54,6 +62,6 @@
       </section>
     </main>
 
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
 </body>
 </html>
