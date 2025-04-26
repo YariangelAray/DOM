@@ -23,7 +23,7 @@ export const validarCampo = (event) => {
   if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {
     agregarError(campo);
   }
-  else if(campo.className == 'borde-rojo') {
+  else if(campo.className.includes('borde-rojo')) {
     quitarError(campo)
   }
 }
@@ -51,7 +51,7 @@ export const validarCampos = (event) => {
 
   const campos = [...event.target].filter((elemento) => elemento);  
   
-  console.log(campos);
+  // console.log(campos);
 
   campos.forEach((campo) => {   
     
@@ -59,14 +59,14 @@ export const validarCampos = (event) => {
       agregarError(campo);
       valido = false;
     }
-    else if (campo.className == 'borde-rojo') {
+    else if (campo.className.includes('borde-rojo')) {
       quitarError(campo);              
     }
   });
 
   const contrasena = campos.find((campo) => campo.name == 'Contrasena');
 
-  console.log(contrasena);
+  // console.log(contrasena);
   
   if ( contrasena.value.trim() != "" && !regexContra.test(contrasena.value)) {
     alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial");
@@ -76,12 +76,3 @@ export const validarCampos = (event) => {
   return valido;
 }
 
-
-export const validarFormulario = (event) => {
-  event.preventDefault();
-  
-  if (validarCampos(event)) {
-    alert("Enviado...");
-    event.target.reset();
-  }
-}
