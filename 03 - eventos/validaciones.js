@@ -20,7 +20,7 @@ export const validarNumero = (event) => {
 export const validarCampo = (event) => {
   let campo = event.target;
 
-  if (campo.value.trim() == "") {
+  if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {
     agregarError(campo);
   }
   else if(campo.className == 'borde-rojo') {
@@ -43,39 +43,32 @@ const quitarError = (campo) => {
   campo.nextElementSibling.remove();
 }
 
-const obtenerCampos = (hijos) => {
-
-}
 
 export const validarCampos = (event) => {
 
   let valido = true;
   let regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
 
-  const campos = [...event.target].filter((elemento) => elemento.hasAttribute('required'));  
+  const campos = [...event.target].filter((elemento) => elemento);  
   
   console.log(campos);
-  
-  // obtenerCampos(hijos);
-  
-  // const campos
 
-  for (let i = 0; i < campos.length; i++) {    
-
-    if (campos[i].value.trim() == "" || (campos[i].tagName == 'SELECT' && campos[i].selectedIndex == 0)) {               
-      agregarError(campos[i]);
+  campos.forEach((campo) => {   
+    
+    if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {               
+      agregarError(campo);
       valido = false;
     }
-    else if (campos[i].className == 'borde-rojo') {
-      quitarError(campos[i]);              
+    else if (campo.className == 'borde-rojo') {
+      quitarError(campo);              
     }
-  }
+  });
 
-  const contrasena = campos.filter((campo) => { campo.getAttribute('name') === 'Contrasena' });
+  const contrasena = campos.find((campo) => campo.name == 'Contrasena');
 
-  console.log(contrasena[0]);
+  console.log(contrasena);
   
-  if ( contrasena && contrasena.value.trim() != "" && !regexContra.test(contrasena.value)) {
+  if ( contrasena.value.trim() != "" && !regexContra.test(contrasena.value)) {
     alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial");
     valido = false;
   }
@@ -83,8 +76,12 @@ export const validarCampos = (event) => {
   return valido;
 }
 
+
 export const validarFormulario = (event) => {
   event.preventDefault();
   
-  if (validarCampos(event)) console.log("Enviado...");
+  if (validarCampos(event)) {
+    alert("Enviado...");
+    event.target.reset();
+  }
 }

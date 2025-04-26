@@ -8,6 +8,7 @@ const boton = document.querySelector('#btn_validar');
 const nombre = document.querySelector('[name="Nombre"]');
 const apellido = document.querySelector('[name="Apellido"]');
 const telefono = document.querySelector('[name="Telefono"]');
+const ciudad = document.querySelector('[name="Ciudad"]');
 const documento = document.querySelector('[name="Documento"]');
 const usuario = document.querySelector('[name="Usuario"]');
 const contrasena = document.querySelector('[name="Contrasena"]');
@@ -20,12 +21,12 @@ const checkBox = document.querySelector('[name="politica"]');
 //funciones
 
 
+
 const habilitarBoton = () => {  
   if (!checkBox.checked) boton.setAttribute('disabled', '');
   
   else if (boton.disabled) boton.removeAttribute('disabled');
 }
-
 
 
 //eventos
@@ -41,6 +42,7 @@ documento.addEventListener('keydown', validarNumero);
 nombre.addEventListener('blur', validarCampo);
 apellido.addEventListener('blur', validarCampo);
 telefono.addEventListener('blur', validarCampo);
+ciudad.addEventListener('blur', validarCampo);
 documento.addEventListener('blur', validarCampo);
 usuario.addEventListener('blur', validarCampo);
 contrasena.addEventListener('blur', validarCampo);
