@@ -21,13 +21,13 @@
             <h2 class="center">Ingrese su datos de usuario</h2>
             <form action="#" novalidate>
               <div class="form__control">
-                <input type="text" name= "Nombre" placeholder="Nombre">              
+                <input type="text" name= "Nombre" placeholder="Nombre" required>
               </div>
               <div class="form__control">
-                <input type="text" name= "Apellido"  placeholder="Apellido">              
+                <input type="text" name= "Apellido"  placeholder="Apellido" required>
               </div>
               <div class="form__control">
-                <input type="tel" name= "Telefono" placeholder="Telefono">              
+                <input type="tel" name= "Telefono" placeholder="Telefono" required>
               </div>
               <div class="form__control">
                 <select name="Ciudad" id="ciudad">
@@ -37,14 +37,63 @@
                   <option value="4">Floridablanca</option>
                 </select>            
               </div>
+
               <div class="form__control">
-                <input type="number" name= "Documento" placeholder="Documento" >              
+                <div class="form__generos">
+                  <h4>Genero:</h4>
+                  <label for="femenino" class="genero">
+                    <input type="radio" name="Genero" id="femenino" value="Femenino" required>
+                    Femenino
+                  </label>
+                  <label for="masculino" class="genero">
+                    <input type="radio" name="Genero" id="masculino" value="Masculino" required>
+                    Masculino
+                  </label>
+                </div>       
+              </div>
+
+              <div class="form__control">
+                <div class="form__habilidades" data-habilidades= "3">
+                  <h4>Habilidades:</h4>
+                  <label for="HTML" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="HTML" value="HTML" required>
+                    HTML
+                  </label>                  
+                  <label for="JS" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="JS" value="JavaScript" required>
+                    JavaScript
+                  </label>
+                  <label for="CSS" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="CSS" value="CSS" required>
+                    CSS
+                  </label>
+                  <label for="Java" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="Java" value="Java" required>
+                    Java
+                  </label>
+                  <label for="PHP" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="PHP" value="PHP" required>
+                    PHP
+                  </label>
+                  <label for="SQL" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="SQL" value="SQL" required>
+                    SQL
+                  </label>
+                  <label for="C#" class="habilidad">
+                    <input type="checkbox" name="Habilidades[]" id="C#" value="C#" required>
+                    C#
+                  </label>
+                </div>       
+              </div>
+
+              <div class="form__control">
+                <input type="number" name= "Documento" placeholder="Documento"  required>
               </div>
               <div class="form__control">
-                <input type="text" name= "Usuario" placeholder="Usuario" >              
+                <input type="text" name= "Usuario" placeholder="Usuario"  required>
               </div>
               <div class="form__control">
-                <input type="password" name= "Contrasena"  placeholder="Contraseña">              
+                <input type="password" name= "Contrasena"  placeholder="Contraseña" required>
               </div>
 
               <div class="form__control">
@@ -55,11 +104,14 @@
               </div>
 
               <button type="submit" id="btn_validar">Validar</button>
-
             </form>
           </div>
+
+
+
         </div>
       </section>
+
     </main>
 
     <script src="app.js" type="module"></script>

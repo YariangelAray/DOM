@@ -185,13 +185,18 @@ button:hover {
   margin: -5px 25px;
 }
 
-.politica {
+.form__generos, .form__habilidades{
+  margin: 20px 30px 10px;
+  padding: 5px 10px;
+}
+
+.politica, .genero, .habilidad{
   display: flex;
   align-items: center;
   margin: 0 30px;
 }
 
-.politica__check {
+input[type="radio"], input[type="checkbox"] {
   display: inline;
   width: auto;
   margin: 0 10px 0 0;

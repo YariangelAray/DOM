@@ -1,5 +1,5 @@
 //importaciones
-import { validarCampo, validarCampos, validarNumero, validarTexto, datos } from "./validaciones.js";
+import { validarCampo, validarCampos, validarNumero, validarTexto, validarCheckeo, datos } from "./validaciones.js";
 
 // variables
 const formulario = document.querySelector('form');
@@ -12,6 +12,10 @@ const ciudad = document.querySelector('[name="Ciudad"]');
 const documento = document.querySelector('[name="Documento"]');
 const usuario = document.querySelector('[name="Usuario"]');
 const contrasena = document.querySelector('[name="Contrasena"]');
+
+const generos = document.querySelectorAll('[name="Genero"]')
+const habilidades = document.querySelectorAll('[name="Habilidades"]')
+
 const checkBox = document.querySelector('[name="politica"]');
 
 // const campos = [nombre, apellido, telefono, documento, usuario, contrasena];
@@ -20,15 +24,32 @@ const checkBox = document.querySelector('[name="politica"]');
 
 //funciones
 
-
-
 const habilitarBoton = () => {  
   if (!checkBox.checked) boton.setAttribute('disabled', '');
   
   else if (boton.disabled) boton.removeAttribute('disabled');
 }
 
+const crearTabla = () => {
+  const primeraSeccion = document.querySelector('section:first-child');
 
+  const tabla = document.createElement('table');
+  const tablaHeader = document.createElement('thead');
+  tabla.append(tablaHeader);
+  const tablaColumna = document.createElement('tr');
+  tablaHeader.append(tablaColumna);
+  const tablaTitulo = document.createElement('th');
+  tablaTitulo.textContent = "Hola";
+  tablaColumna.append(tablaTitulo);
+
+  const segundaSeccion = document.createElement('section');
+  const div = document.createElement('div');
+  div.classList.add('container');
+  segundaSeccion.append(div);
+  div.append(tabla);
+  
+  primeraSeccion.insertAdjacentElement('afterend', segundaSeccion);
+}
 //eventos
 
 addEventListener('DOMContentLoaded', habilitarBoton);
@@ -47,20 +68,19 @@ documento.addEventListener('blur', validarCampo);
 usuario.addEventListener('blur', validarCampo);
 contrasena.addEventListener('blur', validarCampo);
 
+[...generos].forEach((campo) => {
+  campo.addEventListener('change', validarCheckeo);
+});
+
+[...habilidades].forEach((campo) => {
+  campo.addEventListener('change', validarCheckeo);
+});
+
+
 formulario.addEventListener('submit', (event) => {
   event.preventDefault();
 
   if (validarCampos(event)) {
-
-    // const datos = {
-    //   nombre: nombre.value.trim(),
-    //   apellido: apellido.value.trim(),
-    //   telefono: telefono.value.trim(),
-    //   ciudad: ciudad.options[ciudad.selectedIndex].text,
-    //   documento: documento.value.trim(),
-    //   usuario: usuario.value.trim(),
-    //   contrasena: contrasena.value.trim()
-    // };
 
     console.log("Datos guardados:", datos);
 

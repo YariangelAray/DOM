@@ -19,7 +19,6 @@ export const validarNumero = (event) => {
 
 export const validarCampo = (event) => {
   let campo = event.target;
-
   if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {
     agregarError(campo);
   }
@@ -43,26 +42,82 @@ const quitarError = (campo) => {
   campo.nextElementSibling.remove();
 }
 
-export const datos = {};
 
+export const validarCheckeo = (event) => {
+  const contenedor = event.target.parentElement.parentElement;
+  if (contenedor.className.includes('borde-rojo')) quitarError(contenedor);
+  if (event.target.type == 'checkbox' && !event.target.checked) agregarError(contenedor);
+}
+
+const validarRadiosButton = (radiosButton) => {
+  
+  const radioCheckeado = [...radiosButton].find((radio) => radio.checked );
+  const contenedor = document.querySelector('.form__generos');
+  
+  if (!radioCheckeado) {
+    agregarError(contenedor);
+  }
+  else if (contenedor.className.includes('borde-rojo')) quitarError(contenedor);
+  
+  return radioCheckeado;
+}
+
+const validarCheckboxs = (checkBoxs, minHabilidades) => {  
+  const checkBoxList = [...checkBoxs].filter((checkbox) => checkbox.checked);
+  const contenedor = document.querySelector('.form__habilidades');
+  
+  if (checkBoxList.length < minHabilidades) {
+    agregarError(contenedor);
+  }
+  else if (contenedor.className.includes('borde-rojo')) quitarError(contenedor);
+  
+  return checkBoxList;
+}
+
+export const datos = {};
 export const validarCampos = (event) => {
 
   let valido = true;
   let regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
 
-  const campos = [...event.target].filter((elemento) => (elemento.tagName == 'INPUT' && elemento.name != 'politica') || elemento.tagName == 'SELECT');  
+  const campos = [...event.target].filter((elemento) => elemento.hasAttribute('required') && (elemento.tagName == 'INPUT' && elemento.name != 'politica') || elemento.tagName == 'SELECT');  
 
-  campos.forEach((campo) => {   
-    
-    if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {
-      agregarError(campo);
-      valido = false;
+  campos.forEach((campo) => {
+
+    switch (campo.tagName) {
+      case "INPUT":
+        if (campo.value.trim() == "") {
+          agregarError(campo);
+          valido = false;
+        }
+        else if (campo.className.includes('borde-rojo')) quitarError(campo);
+        break;
+      case "SELECT":
+        if (campo.selectedIndex == 0) {
+          agregarError(campo);
+          valido = false;
+        }
+        else if (campo.className.includes('borde-rojo')) quitarError(campo);
+      default:
+        break;
     }
-    else if (campo.className.includes('borde-rojo')) {
-      quitarError(campo);
-    }
-    else datos[campo.getAttribute('name')] = campo.value;
+    datos[campo.getAttribute('name')] = campo.value;
   });
+
+  const radiosButton = [...campos].filter((campo) => campo.type === 'radio');
+  const radioCheckeado = validarRadiosButton(radiosButton);
+
+  if (!radioCheckeado) valido = false;
+  else datos.Genero = radioCheckeado.value;
+
+  const contenedorHabilidades = document.querySelector('.form__habilidades');
+  const minHabilidades = contenedorHabilidades.dataset.habilidades;
+
+  const checkBoxs = [...campos].filter((campo) => campo.type === 'checkbox');
+  const checkBoxList = validarCheckboxs(checkBoxs, minHabilidades);
+
+  if (checkBoxList.length < minHabilidades) valido = false;
+  else datos[checkBoxs[0].name] = checkBoxList.map((check) => check.value);
 
   const contrasena = campos.find((campo) => campo.name == 'Contrasena');
   
