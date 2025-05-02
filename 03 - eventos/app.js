@@ -1,5 +1,5 @@
 //importaciones
-import { validarCampo, validarCampos, validarNumero, validarTexto } from "./validaciones.js";
+import { validarCampo, validarCampos, validarNumero, validarTexto, datos } from "./validaciones.js";
 
 // variables
 const formulario = document.querySelector('form');
@@ -52,15 +52,15 @@ formulario.addEventListener('submit', (event) => {
 
   if (validarCampos(event)) {
 
-    const datos = {
-      nombre: nombre.value.trim(),
-      apellido: apellido.value.trim(),
-      telefono: telefono.value.trim(),
-      ciudad: ciudad.options[ciudad.selectedIndex].text,
-      documento: documento.value.trim(),
-      usuario: usuario.value.trim(),
-      contrasena: contrasena.value.trim()
-    };
+    // const datos = {
+    //   nombre: nombre.value.trim(),
+    //   apellido: apellido.value.trim(),
+    //   telefono: telefono.value.trim(),
+    //   ciudad: ciudad.options[ciudad.selectedIndex].text,
+    //   documento: documento.value.trim(),
+    //   usuario: usuario.value.trim(),
+    //   contrasena: contrasena.value.trim()
+    // };
 
     console.log("Datos guardados:", datos);
 

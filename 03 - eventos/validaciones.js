@@ -43,32 +43,30 @@ const quitarError = (campo) => {
   campo.nextElementSibling.remove();
 }
 
+export const datos = {};
 
 export const validarCampos = (event) => {
 
   let valido = true;
   let regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
 
-  const campos = [...event.target].filter((elemento) => elemento);  
-  
-  // console.log(campos);
+  const campos = [...event.target].filter((elemento) => (elemento.tagName == 'INPUT' && elemento.name != 'politica') || elemento.tagName == 'SELECT');  
 
   campos.forEach((campo) => {   
     
-    if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {               
+    if ((campo.tagName == 'INPUT' && campo.value.trim() == "") || (campo.tagName == 'SELECT' && campo.selectedIndex == 0)) {
       agregarError(campo);
       valido = false;
     }
     else if (campo.className.includes('borde-rojo')) {
-      quitarError(campo);              
+      quitarError(campo);
     }
+    else datos[campo.getAttribute('name')] = campo.value;
   });
 
   const contrasena = campos.find((campo) => campo.name == 'Contrasena');
-
-  // console.log(contrasena);
   
-  if ( contrasena.value.trim() != "" && !regexContra.test(contrasena.value)) {
+  if (contrasena.value.trim() != "" && !regexContra.test(contrasena.value)) {
     alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial");
     valido = false;
   }
